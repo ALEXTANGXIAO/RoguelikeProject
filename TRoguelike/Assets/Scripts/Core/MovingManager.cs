@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TGame
 {
-    public abstract class MovingManager : MonoBehaviour
+    public abstract class MovingManager : MonoSingleton<MovingManager>
     {
         public LayerMask blockingLayer;
         public float moveTime = 1f;
@@ -49,6 +49,10 @@ namespace TGame
             }
 
             return false;
+        }
+        public virtual void MoveByPath(Dictionary<Vector2, MapInfo> pathDic)
+        {
+
         }
 
         protected virtual void AttempMove<T>(int xDir, int yDir) where T : Component

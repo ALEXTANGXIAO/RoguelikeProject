@@ -23,10 +23,35 @@ namespace TGame
             }
         }
 
-
         protected override void OnCantMove<T>(T component)
         {
             throw new System.NotImplementedException();
+        }
+
+        public override void MoveByPath(Dictionary<Vector2, MapInfo> pathDic)
+        {
+            if (pathDic.Count == 0)
+            {
+                return;
+            }
+
+            foreach (var item in pathDic)
+            {
+                StartCoroutine(yieldMove(item.Key));
+            }
+        }
+
+        private IEnumerator yieldMove(Vector2 info)
+        {
+            int x = (int)info.x - (int)transform.position.x;
+            int y = (int)info.y - (int)transform.position.y;
+            yield return new WaitForSeconds(0f);
+            AttempMove<Player>(x, y);
+        }
+
+        public void Move(int x,int y)
+        {
+            AttempMove<Player>(x, y);
         }
     }
 }

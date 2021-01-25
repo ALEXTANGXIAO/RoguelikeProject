@@ -106,6 +106,7 @@ namespace TGame
                 GameObject instance = Instantiate(obj, randomPosition, Quaternion.identity);
                 instance.transform.SetParent(objHandler);
                 instance.name = obj.name;
+                SetMapTag((int)randomPosition.x, (int)randomPosition.y,1);
             }
         }
 
@@ -123,6 +124,11 @@ namespace TGame
             {
                 Instantiate(exitTile, new Vector3(columns - 1, rows - 1, 0f), Quaternion.identity);
             }
+        }
+
+        public void SetMapTag(int x, int y, int tag)
+        {
+            Map.SetMap(x, y, tag);
         }
     }
 }

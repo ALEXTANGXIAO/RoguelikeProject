@@ -121,8 +121,13 @@ namespace TGame
         {
             if (end.tag == 1) return;
 
+            int protect_ = 0;
             openList.Clear();
             closeList.Clear();
+            if (adjancentMap != null)
+            {
+                adjancentMap = null;
+            }
             map = Map.MapTemp;
 
             openList.Add(start.x + "-" + start.y, start);
@@ -169,8 +174,12 @@ namespace TGame
                     }
                 }
 
-
-            } while (openList.Count > 0);
+                protect_++;
+                if(protect_ > 100)
+                {
+                    Debug.LogError("傻逼你写的A*有问题");
+                }
+            } while (openList.Count > 0 || protect_ > 100);
         }
 
         /// <summary>
@@ -268,7 +277,7 @@ namespace TGame
             pathDic.Clear();
 
             MapInfo m = end;
-            
+
             while (m.parent != null)
             {
                 pathDic.Add(new Vector2(m.x,m.y), m);

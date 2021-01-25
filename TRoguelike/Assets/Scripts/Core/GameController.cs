@@ -22,7 +22,7 @@ namespace TGame
             rogueLikeManager.SetScene();
         }
 
-        private void Update()
+        public void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -36,7 +36,8 @@ namespace TGame
 
                     var startpos = GameObject.Find("Player").transform.position;
                     FindPath(startpos, endpos);
-                    Debug.Log(AStar.Instance.pathDic); 
+                    Debug.Log(AStar.Instance.pathDic);
+                    Player.Instance.MoveByPath(AStar.Instance.pathDic);
                 }
             }
         }
