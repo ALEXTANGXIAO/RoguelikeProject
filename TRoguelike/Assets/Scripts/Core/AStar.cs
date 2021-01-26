@@ -83,7 +83,7 @@ namespace TGame
         /// <summary>
         /// 地图
         /// </summary>
-        Dictionary<string, MapInfo> map;
+        Dictionary<string, MapInfo> map = new Dictionary<string, MapInfo>();
         /// <summary>
         /// open列表
         /// </summary>
@@ -107,11 +107,6 @@ namespace TGame
         /// </summary>
         public Dictionary<Vector2, MapInfo> pathDic = new Dictionary<Vector2, MapInfo>();
 
-        void Start()
-        {
-            map = Map.MapTemp;
-        }
-
         /// <summary>
         /// 寻路
         /// </summary>
@@ -124,11 +119,17 @@ namespace TGame
             int protect_ = 0;
             openList.Clear();
             closeList.Clear();
+            currentV = null;
             if (adjancentMap != null)
             {
                 adjancentMap = null;
             }
-            map = Map.MapTemp;
+
+            map = Map.MapTemp;          //临时Ugly 解决方案
+            foreach (var item in map)
+            {
+                item.Value.parent = null;
+            }
 
             openList.Add(start.x + "-" + start.y, start);
 
@@ -142,7 +143,7 @@ namespace TGame
                 if (closeList.ContainsKey(end.x + "-" + end.y))
                 {
                     Debug.Log("FindPath");
-                    PrintThePath(end);
+                    //PrintThePath(end);
                     SetThePath(end);
                     break;
                 }
@@ -175,11 +176,12 @@ namespace TGame
                 }
 
                 protect_++;
-                if(protect_ > 100)
+                if(protect_ > 3000)
                 {
-                    Debug.LogError("傻逼你写的A*有问题");
+                    Debug.LogError("傻逼,现在死循环了吧");
+                    break;
                 }
-            } while (openList.Count > 0 || protect_ > 100);
+            } while (openList.Count > 0 || protect_ > 3000);
         }
 
         /// <summary>
@@ -210,6 +212,7 @@ namespace TGame
         public Dictionary<string, MapInfo> AdjacentList(MapInfo m)
         {
             Dictionary<string, MapInfo> resultDic = new Dictionary<string, MapInfo>();
+
 
             string left = (m.x - 1) + "-" + m.y;
             string right = (m.x + 1) + "-" + m.y;
@@ -260,7 +263,7 @@ namespace TGame
         /// 输出路径
         /// </summary>
         /// <param name="end">终点</param>
-        public void PrintThePath(MapInfo end)
+        public void PrintThePath(MapInfo end)       //不晓得为啥这里第二次进来会死循环
         {
             string s = "";
             MapInfo m = end;

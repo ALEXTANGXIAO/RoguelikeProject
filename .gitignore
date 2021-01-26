@@ -1,2 +1,4 @@
 # ignore target folder
-TRoguelike/Library
+TRoguelike/Library/
+TRoguelike/Library/Artifacts/
+*.backup

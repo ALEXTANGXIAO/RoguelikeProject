@@ -45,8 +45,8 @@ namespace TGame
         {
             int x = (int)info.x - (int)transform.position.x;
             int y = (int)info.y - (int)transform.position.y;
-            yield return new WaitForSeconds(0f);
             AttempMove<Player>(x, y);
+            yield return new WaitForSeconds(2f);
         }
 
         public void Move(int x,int y)

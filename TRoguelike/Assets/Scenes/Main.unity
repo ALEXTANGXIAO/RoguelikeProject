@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 227069347}
   - component: {fileID: 227069349}
   - component: {fileID: 227069348}
+  - component: {fileID: 227069350}
   m_Layer: 0
   m_Name: GameMain
   m_TagString: Untagged
@@ -369,6 +370,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTurn: 1
+--- !u!114 &227069350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227069346}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 169cf0d623aba4d4b83d4e2ed6e821d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
